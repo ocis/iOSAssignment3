@@ -62,6 +62,7 @@ enum
     GLuint bothWallsTexture;
     GLuint noWallsTexture;
     GLuint floorTexture;
+    GLuint enemyTexture;
     
     // GLES buffer IDs
     GLuint _vertexArray;
@@ -97,7 +98,7 @@ enum
     
     // Model
     float *vertices, *normals, *texCoords;
-    GLuint *indices, numIndices, numWallIndices, numMarkerIndices;
+    GLuint *indices, numIndices, numWallIndices, numMarkerIndices, numEnemyIndices;
     
     
     // Misc UI variables
@@ -189,6 +190,7 @@ enum
     // Load shaders
     char *vShaderStr = glesRenderer.LoadShaderFile([[[NSBundle mainBundle] pathForResource:[[NSString stringWithUTF8String:"Shader.vsh"] stringByDeletingPathExtension] ofType:[[NSString stringWithUTF8String:"Shader.vsh"] pathExtension]] cStringUsingEncoding:1]);
     char *fShaderStr = glesRenderer.LoadShaderFile([[[NSBundle mainBundle] pathForResource:[[NSString stringWithUTF8String:"Shader.fsh"] stringByDeletingPathExtension] ofType:[[NSString stringWithUTF8String:"Shader.fsh"] pathExtension]] cStringUsingEncoding:1]);
+    
     _program = glesRenderer.LoadProgram(vShaderStr, fShaderStr);
     if (_program == 0)
         return false;
@@ -291,7 +293,11 @@ enum
     
     // Generate vertex attribute values from model
     int numVerts;
-    numIndices = glesRenderer.GenEnemyCube(1.0f, &vertices, &normals, &texCoords, &indices, &numVerts);
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"boxModel" ofType:@"custom"];
+    const char *modelFileName = [path UTF8String];
+    
+    numEnemyIndices = glesRenderer.GenEnemyCube(0.5f, &vertices, &normals, &texCoords, &indices, &numVerts, modelFileName);
     
     // Set up VBOs...
     
@@ -316,18 +322,13 @@ enum
     
     // Set up index buffer
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferForEnemy);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int)*numIndices, indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int)*numEnemyIndices, indices, GL_STATIC_DRAW);
     
     // Reset VAO
     glBindVertexArray(0);
     
     // Load texture to apply and set up texture in GL
-    leftWallTexture = [self setupTexture:@"brickTexture.jpg"];
-    rightWallTexture = [self setupTexture:@"drywallTexture.jpg"];
-    bothWallsTexture = [self setupTexture:@"greywallTexture.jpg"];
-    noWallsTexture = [self setupTexture:@"stonewallTexture.jpg"];
-    floorTexture = [self setupTexture:@"grassTexture.jpg"];
-    
+    enemyTexture = [self setupTexture:@"ghost.jpg"];
 }
 
 //=======================
@@ -575,6 +576,39 @@ enum
     glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, 0);
     // ABOVE IS DRAWING A SINGLE CUBE ==================================
     
+    // Drawing enemy cube
+    glBindVertexArray(_vertexArrayForEnemy);
+    glUseProgram(_program);
+    
+    // Apply texture to next drawn object
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, enemyTexture);
+    glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
+    
+    // Set upmodel matrix (place wall in world)
+    GLKMatrix4 modelMatrix = GLKMatrix4MakeTranslation(0, 0.0f, 0 + mazeDistance + floorDistance);
+    
+    // Set up view matrix (place camera position)
+    GLKMatrix4 viewMatrix = GLKMatrix4MakeTranslation(viewTranslateX, 0.0f,viewTranslateZ);
+    GLKMatrix4 rotationMatrix = GLKMatrix4Rotate(GLKMatrix4Identity, -viewRotateY, 0.0f, 1.0f, 0.0f);
+    viewMatrix = GLKMatrix4Multiply(rotationMatrix, viewMatrix);
+    
+    GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(viewMatrix, modelMatrix);
+    
+    // Calculate normal matrix
+    GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+    
+    // Calculate projection matrix
+    float aspect = fabsf(theView.bounds.size.width / theView.bounds.size.height);
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+    
+    // Calculate model-view-projection matrix
+    GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+    [self setUniforms:modelViewProjectionMatrix normalMatrix:normalMatrix modelViewMatrix:modelViewMatrix];
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferForEnemy);
+    glDrawElements(GL_TRIANGLES, numEnemyIndices, GL_UNSIGNED_INT, 0);
+    // Done drawing enemy cube=================================================
     
     if(!mazeDrawn){
         [self initMaze];

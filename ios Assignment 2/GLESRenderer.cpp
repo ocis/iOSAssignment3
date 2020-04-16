@@ -7,6 +7,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <iostream>
+#include <fstream>
 #include <math.h>
 #include "GLESRenderer.hpp"
 #include <vector>
@@ -128,21 +129,17 @@ GLuint GLESRenderer::LinkProgram(GLuint programObject)
 //      Adapted from Dan Ginsburg, Budirijanto Purnomo from the book
 //      OpenGL(R) ES 2.0 Programming Guide
 int GLESRenderer::GenEnemyCube(float scale, GLfloat **vertices, GLfloat **normals,
-                          GLfloat **texCoords, GLuint **indices, int *numVerts)
+                          GLfloat **texCoords, GLuint **indices, int *numVerts, const char *modelFileName)
 {
     int i;
     
     std::vector< float > enemyVerts, enemyTex, enemyNorms;
-    std::vector< int > enemyIndices;
-    std::vector< glm::vec3 > temp_verts;
-    std::vector< glm::vec2 > temp_tex;
-    std::vector< glm::vec3 > temp_norms;
-    std::vector< glm::vec3 > temp_indeces;
+    std::vector< unsigned int > enemyIndices;
     
-    FILE * file = fopen("boxModel.custom", "r");
+    FILE * file = fopen(modelFileName, "rb");
     
     if(file == NULL){
-        printf("Can't open file");
+        printf("Can't open box file");
         return -1;
     }
     
@@ -173,14 +170,14 @@ int GLESRenderer::GenEnemyCube(float scale, GLfloat **vertices, GLfloat **normal
             enemyNorms.push_back(norm.y);
             enemyNorms.push_back(norm.z);
         }else if(strcmp(lineheader, "vi") == 0){
-            glm::ivec3 index;
-            fscanf(file, "%d, %d, %d\n", &index.x, &index.y, &index.z);
+            glm::uvec3 index;
+            fscanf(file, "%u, %u, %u\n", &index.x, &index.y, &index.z);
             enemyIndices.push_back(index.x);
             enemyIndices.push_back(index.y);
             enemyIndices.push_back(index.z);
         }
     }
-    
+    fclose(file);
     //=======================================
     
     GLfloat cubeVerts[enemyVerts.size()];
@@ -194,6 +191,11 @@ int GLESRenderer::GenEnemyCube(float scale, GLfloat **vertices, GLfloat **normal
     
     GLuint cubeIndices[enemyIndices.size()];
     std::copy(enemyIndices.begin(), enemyIndices.end(), cubeIndices);
+    
+    int j;
+    for(j = 0; j < sizeof(cubeVerts) / sizeof(cubeVerts[0]); j++){
+        std::cout << cubeVerts[j] << ' ';
+    }
     
     int numVertices = static_cast<int>(enemyVerts.size()) / 3;
     int numIndices = static_cast<int>(enemyIndices.size()) / 3;

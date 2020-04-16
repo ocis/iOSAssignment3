@@ -24,7 +24,7 @@ public:
     int GenCube(float scale, GLfloat **vertices, GLfloat **normals,
                 GLfloat **texCoords, GLuint ** indices, int *numVerts);
     int GenEnemyCube(float scale, GLfloat **vertices, GLfloat **normals,
-    GLfloat **texCoords, GLuint ** indices, int *numVerts);
+    GLfloat **texCoords, GLuint ** indices, int *numVerts,  const char *modelFileName);
     int GenSphere(int numSlices, float radius, GLfloat **vertices, GLfloat **normals,
                   GLfloat **texCoords, GLuint **indices, int *numVerts);
     

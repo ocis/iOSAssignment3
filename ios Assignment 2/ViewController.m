@@ -24,6 +24,7 @@
     [renderer loadModels];
     [renderer loadWallModel];
     [renderer loadMarkerModel];
+    [renderer loadEnemyModel];
     
     [renderer initMaze];
     
