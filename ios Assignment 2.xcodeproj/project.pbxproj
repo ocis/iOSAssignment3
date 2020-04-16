@@ -27,12 +27,13 @@
 		E1FDC664241B06E500ECDA2F /* stonewallTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1FDC660241B06E500ECDA2F /* stonewallTexture.jpg */; };
 		E1FDC665241B06E500ECDA2F /* drywallTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1FDC661241B06E500ECDA2F /* drywallTexture.jpg */; };
 		E905EA132446EF80008125AC /* glm in Resources */ = {isa = PBXBuildFile; fileRef = E905EA122446EF80008125AC /* glm */; };
-		E905EA172448D4E0008125AC /* boxModel.custom in Resources */ = {isa = PBXBuildFile; fileRef = E905EA162448D4E0008125AC /* boxModel.custom */; };
+		E905EA192448FD8C008125AC /* pacman-ghost-red-prints.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E905EA182448FD8C008125AC /* pacman-ghost-red-prints.jpg */; };
+		E905EA1B2448FEB5008125AC /* boxModel.custom in Resources */ = {isa = PBXBuildFile; fileRef = E905EA1A2448FEB5008125AC /* boxModel.custom */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E1165F31241C31AB00985925 /* grassTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grassTexture.jpg; sourceTree = "<group>"; };
-		E1FDC5F3241ACF1400ECDA2F /* ios Assignment 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios Assignment 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1FDC5F3241ACF1400ECDA2F /* ios Assignment 3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios Assignment 3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1FDC5F6241ACF1400ECDA2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E1FDC5F7241ACF1400ECDA2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E1FDC5F9241ACF1400ECDA2F /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -60,7 +61,8 @@
 		E1FDC660241B06E500ECDA2F /* stonewallTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stonewallTexture.jpg; sourceTree = "<group>"; };
 		E1FDC661241B06E500ECDA2F /* drywallTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drywallTexture.jpg; sourceTree = "<group>"; };
 		E905EA122446EF80008125AC /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
-		E905EA162448D4E0008125AC /* boxModel.custom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = boxModel.custom; sourceTree = "<group>"; };
+		E905EA182448FD8C008125AC /* pacman-ghost-red-prints.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pacman-ghost-red-prints.jpg"; sourceTree = "<group>"; };
+		E905EA1A2448FEB5008125AC /* boxModel.custom */ = {isa = PBXFileReference; lastKnownFileType = text; path = boxModel.custom; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +87,7 @@
 		E1FDC5F4241ACF1400ECDA2F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E1FDC5F3241ACF1400ECDA2F /* ios Assignment 2.app */,
+				E1FDC5F3241ACF1400ECDA2F /* ios Assignment 3.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,8 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				E905EA122446EF80008125AC /* glm */,
-				E905EA162448D4E0008125AC /* boxModel.custom */,
+				E905EA182448FD8C008125AC /* pacman-ghost-red-prints.jpg */,
 				E1165F31241C31AB00985925 /* grassTexture.jpg */,
+				E905EA1A2448FEB5008125AC /* boxModel.custom */,
 				E1FDC65F241B06E500ECDA2F /* brickTexture.jpg */,
 				E1FDC661241B06E500ECDA2F /* drywallTexture.jpg */,
 				E1FDC65E241B06E500ECDA2F /* greywallTexture.jpg */,
@@ -143,7 +146,7 @@
 			);
 			name = "ios Assignment 2";
 			productName = "ios Assignment 2";
-			productReference = E1FDC5F3241ACF1400ECDA2F /* ios Assignment 2.app */;
+			productReference = E1FDC5F3241ACF1400ECDA2F /* ios Assignment 3.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,11 +186,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E905EA172448D4E0008125AC /* boxModel.custom in Resources */,
 				E1FDC662241B06E500ECDA2F /* greywallTexture.jpg in Resources */,
 				E1FDC665241B06E500ECDA2F /* drywallTexture.jpg in Resources */,
 				E1FDC659241ADAB000ECDA2F /* Shader.vsh in Resources */,
 				E1FDC606241ACF1400ECDA2F /* LaunchScreen.storyboard in Resources */,
+				E905EA1B2448FEB5008125AC /* boxModel.custom in Resources */,
 				E1FDC663241B06E500ECDA2F /* brickTexture.jpg in Resources */,
 				E1FDC603241ACF1400ECDA2F /* Assets.xcassets in Resources */,
 				E1FDC65D241ADC9E00ECDA2F /* crate.jpg in Resources */,
@@ -196,6 +199,7 @@
 				E1165F32241C31AB00985925 /* grassTexture.jpg in Resources */,
 				E1FDC664241B06E500ECDA2F /* stonewallTexture.jpg in Resources */,
 				E1FDC65B241ADAD700ECDA2F /* Shader.fsh in Resources */,
+				E905EA192448FD8C008125AC /* pacman-ghost-red-prints.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,8 +365,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "bcit.ios-Assignment-2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "bcit.ios-Assignment-3";
+				PRODUCT_NAME = "ios Assignment 3";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -379,8 +383,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "bcit.ios-Assignment-2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "bcit.ios-Assignment-3";
+				PRODUCT_NAME = "ios Assignment 3";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
