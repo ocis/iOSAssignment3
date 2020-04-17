@@ -62,7 +62,7 @@ enum
     GLuint bothWallsTexture;
     GLuint noWallsTexture;
     GLuint floorTexture;
-    GLuint enemyTexture;
+    GLuint ghostTexture;
     
     // GLES buffer IDs
     GLuint _vertexArray;
@@ -174,14 +174,42 @@ enum
     minimapScale = 1.0f;
     enableMap = false;
     
+    // Initialize enemy vars
+    enemyMoveX = 0.0f;
+    enemyMoveY = 0.0f;
+    enemyMoveZ = 0.0f;
+    enemyScreenMoveX = 0.0f;
+    enemyScreenMoveY = 0.0f;
+    enemyScreenMoveZ = 0.0f;
+    enemyRotateY = 0.0f;
+    enemyScreenRotateX = 0.0f;
+    enemyScreenRotateXFactor = 1.0f;
+    enemyScreenRotateZFactor = 0.0f;
+    enemyScreenRotateY = 0.0f;
+    enemyScaleFactor = 1.0f;
+    enableEnemyEdit = false;
+    
     // Initialize GL color and other parameters
     glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
     glEnable(GL_DEPTH_TEST);
     lastTime = std::chrono::steady_clock::now();
     
 }
-
-
+//=========================
+// Resets all the changes made to the enemy in edit mode
+//=========================
+- (void)resetEdits{
+    enemyMoveY = 0.0f;
+    enemyScreenMoveX = 0.0f;
+    enemyScreenMoveY = 0.0f;
+    enemyScreenMoveZ = 0.0f;
+    enemyRotateY = 0.0f;
+    enemyScreenRotateX = 0.0f;
+    enemyScreenRotateXFactor = 1.0f;
+    enemyScreenRotateZFactor = 0.0f;
+    enemyScreenRotateY = 0.0f;
+    enemyScaleFactor = 1.0f;
+}
 //=======================
 // Load and set up shaders
 //=======================
@@ -297,7 +325,7 @@ enum
     NSString *path = [[NSBundle mainBundle] pathForResource:@"boxModel" ofType:@"custom"];
     const char *modelFileName = [path UTF8String];
     
-    numEnemyIndices = glesRenderer.GenEnemyCube(0.5f, &vertices, &normals, &texCoords, &indices, &numVerts, modelFileName);
+    numEnemyIndices = glesRenderer.GenEnemyCube(0.25f, &vertices, &normals, &texCoords, &indices, &numVerts, modelFileName);
     
     // Set up VBOs...
     
@@ -327,8 +355,8 @@ enum
     // Reset VAO
     glBindVertexArray(0);
     
-    // Load texture to apply and set up texture in GL
-    enemyTexture = [self setupTexture:@"ghost.jpg"];
+    ghostTexture = [self setupTexture:@"ghost.jpg"];
+
 }
 
 //=======================
@@ -576,17 +604,23 @@ enum
     glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, 0);
     // ABOVE IS DRAWING A SINGLE CUBE ==================================
     
-    // Drawing enemy cube
+    // DRAWING ENEMY CUBE
     glBindVertexArray(_vertexArrayForEnemy);
     glUseProgram(_program);
     
     // Apply texture to next drawn object
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, enemyTexture);
+    glBindTexture(GL_TEXTURE_2D, ghostTexture);
     glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
     
     // Set upmodel matrix (place wall in world)
-    GLKMatrix4 modelMatrix = GLKMatrix4MakeTranslation(0, 0.0f, 0 + mazeDistance + floorDistance);
+    GLKMatrix4 modelMatrix = GLKMatrix4MakeTranslation(enemyMoveX + enemyScreenMoveX, enemyMoveY + enemyScreenMoveY, enemyMoveZ + enemyScreenMoveZ + mazeDistance);
+    
+    modelMatrix = GLKMatrix4Scale(modelMatrix, enemyScaleFactor, enemyScaleFactor, enemyScaleFactor);
+    
+    modelMatrix = GLKMatrix4Rotate(modelMatrix, enemyScreenRotateX, enemyScreenRotateXFactor, 0.0f, enemyScreenRotateZFactor);
+    
+    modelMatrix = GLKMatrix4Rotate(modelMatrix, enemyScreenRotateY, 0.0f, 1.0f, 0.0f);
     
     // Set up view matrix (place camera position)
     GLKMatrix4 viewMatrix = GLKMatrix4MakeTranslation(viewTranslateX, 0.0f,viewTranslateZ);
@@ -608,7 +642,7 @@ enum
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferForEnemy);
     glDrawElements(GL_TRIANGLES, numEnemyIndices, GL_UNSIGNED_INT, 0);
-    // Done drawing enemy cube=================================================
+    // DONE DRAWING ENEMY CUBE=================================================
     
     if(!mazeDrawn){
         [self initMaze];

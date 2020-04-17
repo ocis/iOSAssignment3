@@ -192,13 +192,8 @@ int GLESRenderer::GenEnemyCube(float scale, GLfloat **vertices, GLfloat **normal
     GLuint cubeIndices[enemyIndices.size()];
     std::copy(enemyIndices.begin(), enemyIndices.end(), cubeIndices);
     
-    int j;
-    for(j = 0; j < sizeof(cubeVerts) / sizeof(cubeVerts[0]); j++){
-        std::cout << cubeVerts[j] << ' ';
-    }
-    
     int numVertices = static_cast<int>(enemyVerts.size()) / 3;
-    int numIndices = static_cast<int>(enemyIndices.size()) / 3;
+    int numIndices = static_cast<int>(enemyIndices.size());
     
     // Allocate memory for buffers
     if ( vertices != NULL )

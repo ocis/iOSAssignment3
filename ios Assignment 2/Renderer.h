@@ -10,10 +10,12 @@
 @interface Renderer : NSObject
 {
     @public float viewTranslateX, viewTranslateY, viewTranslateZ;
+    @public float enemyMoveX, enemyMoveY, enemyMoveZ, enemyRotateY,
+                    enemyScreenMoveX, enemyScreenMoveY, enemyScreenMoveZ, enemyScreenRotateX, enemyScreenRotateXFactor, enemyScreenRotateZFactor, enemyScreenRotateY, enemyScaleFactor;
     @public float viewRotateX, viewRotateY, viewRotateZ;
     @public float minimapViewRotateX, minimapViewRotateY, minimapViewRotateZ;
     @public float minimapTranslateX, minimapTranslateY, minimapTranslateZ;
-    @public bool enableMap;
+    @public bool enableMap, enableEnemyEdit;
 }
 
 // Properties to interface with iOS UI code
@@ -26,6 +28,7 @@
 - (void)loadWallModel; // Loads wall
 - (void)loadMarkerModel; //Loads marker
 - (void)initMaze;
+- (void)resetEdits;
 - (void)update;                     // Update GL
 - (void)draw:(CGRect)drawRect;      // Make the GL draw calls
 - (void)setUniforms:(GLKMatrix4)_modelViewProjectionMatrix :(GLKMatrix3)_normalMatrix :(GLKMatrix4)_modelViewMatrix;

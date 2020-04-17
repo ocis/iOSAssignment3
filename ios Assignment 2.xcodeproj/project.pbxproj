@@ -27,8 +27,8 @@
 		E1FDC664241B06E500ECDA2F /* stonewallTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1FDC660241B06E500ECDA2F /* stonewallTexture.jpg */; };
 		E1FDC665241B06E500ECDA2F /* drywallTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1FDC661241B06E500ECDA2F /* drywallTexture.jpg */; };
 		E905EA132446EF80008125AC /* glm in Resources */ = {isa = PBXBuildFile; fileRef = E905EA122446EF80008125AC /* glm */; };
-		E905EA192448FD8C008125AC /* ghost.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E905EA182448FD8C008125AC /* ghost.jpg */; };
 		E905EA1B2448FEB5008125AC /* boxModel.custom in Resources */ = {isa = PBXBuildFile; fileRef = E905EA1A2448FEB5008125AC /* boxModel.custom */; };
+		E9388592244922D100E7A0AF /* ghost.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9388591244922D100E7A0AF /* ghost.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,8 +61,8 @@
 		E1FDC660241B06E500ECDA2F /* stonewallTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stonewallTexture.jpg; sourceTree = "<group>"; };
 		E1FDC661241B06E500ECDA2F /* drywallTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drywallTexture.jpg; sourceTree = "<group>"; };
 		E905EA122446EF80008125AC /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
-		E905EA182448FD8C008125AC /* ghost.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ghost.jpg; sourceTree = "<group>"; };
 		E905EA1A2448FEB5008125AC /* boxModel.custom */ = {isa = PBXFileReference; lastKnownFileType = text; path = boxModel.custom; sourceTree = "<group>"; };
+		E9388591244922D100E7A0AF /* ghost.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ghost.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,9 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				E905EA122446EF80008125AC /* glm */,
-				E905EA182448FD8C008125AC /* ghost.jpg */,
 				E1165F31241C31AB00985925 /* grassTexture.jpg */,
 				E905EA1A2448FEB5008125AC /* boxModel.custom */,
+				E9388591244922D100E7A0AF /* ghost.jpg */,
 				E1FDC65F241B06E500ECDA2F /* brickTexture.jpg */,
 				E1FDC661241B06E500ECDA2F /* drywallTexture.jpg */,
 				E1FDC65E241B06E500ECDA2F /* greywallTexture.jpg */,
@@ -187,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1FDC662241B06E500ECDA2F /* greywallTexture.jpg in Resources */,
+				E9388592244922D100E7A0AF /* ghost.jpg in Resources */,
 				E1FDC665241B06E500ECDA2F /* drywallTexture.jpg in Resources */,
 				E1FDC659241ADAB000ECDA2F /* Shader.vsh in Resources */,
 				E1FDC606241ACF1400ECDA2F /* LaunchScreen.storyboard in Resources */,
@@ -199,7 +200,6 @@
 				E1165F32241C31AB00985925 /* grassTexture.jpg in Resources */,
 				E1FDC664241B06E500ECDA2F /* stonewallTexture.jpg in Resources */,
 				E1FDC65B241ADAD700ECDA2F /* Shader.fsh in Resources */,
-				E905EA192448FD8C008125AC /* ghost.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
